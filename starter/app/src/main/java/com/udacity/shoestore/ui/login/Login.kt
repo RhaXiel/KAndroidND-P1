@@ -15,8 +15,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 
 import com.udacity.shoestore.R
+import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class Login : Fragment() {
 
@@ -28,6 +31,11 @@ class Login : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_login, container, false)
+        /*val binding = inflater.inflate(R.layout.fragment_login, container, false)
+        binding.login_button.setOnClickListener { v: View ->
+            v.findNavController().navigate(LoginDirections.actionLoginScreenToWelcome())
+        }
+        return binding.rootView*/
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,9 +43,9 @@ class Login : Fragment() {
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 
-        val usernameEditText = view.findViewById<EditText>(R.id.username)
-        val passwordEditText = view.findViewById<EditText>(R.id.password)
-        val loginButton = view.findViewById<Button>(R.id.login)
+        val usernameEditText = view.findViewById<EditText>(R.id.username_textview)
+        val passwordEditText = view.findViewById<EditText>(R.id.password_textview)
+        val loginButton = view.findViewById<Button>(R.id.login_button)
         val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
 
         loginViewModel.loginFormState.observe(this,
@@ -100,14 +108,16 @@ class Login : Fragment() {
                 usernameEditText.text.toString(),
                 passwordEditText.text.toString()
             )
+            it.findNavController().navigate(LoginDirections.actionLoginScreenToWelcome())
         }
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome) + model.displayName
+        val welcome = getString(R.string.welcome) + " " + model.displayName
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {

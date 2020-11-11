@@ -3,11 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/login_screen">
+    app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/login_screen"
+        android:id="@+id/loginFragment"
         android:name="com.udacity.shoestore.ui.login.Login"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_screen_to_welcome"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.udacity.shoestore.Welcome"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcome_to_instructions"
+            app:destination="@id/instructionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/instructionsFragment"
+        android:name="com.udacity.shoestore.Instructions"
+        android:label="fragment_instructions"
+        tools:layout="@layout/fragment_instructions" >
+        <action
+            android:id="@+id/action_instructions_to_listing"
+            app:destination="@id/listingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listingFragment"
+        android:name="com.udacity.shoestore.Listing"
+        android:label="listing_fragment"
+        tools:layout="@layout/listing_fragment" />
 </navigation>
