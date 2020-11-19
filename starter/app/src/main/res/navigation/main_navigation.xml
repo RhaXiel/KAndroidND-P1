@@ -21,7 +21,8 @@
         tools:layout="@layout/fragment_welcome" >
         <action
             android:id="@+id/action_welcome_to_instructions"
-            app:destination="@id/instructionsFragment" />
+            app:destination="@id/instructionsFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/instructionsFragment"
@@ -30,11 +31,12 @@
         tools:layout="@layout/fragment_instructions" >
         <action
             android:id="@+id/action_instructions_to_listing"
-            app:destination="@id/listingFragment" />
+            app:destination="@id/listingFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/listingFragment"
         android:name="com.udacity.shoestore.Listing"
         android:label="listing_fragment"
-        tools:layout="@layout/listing_fragment" />
+        tools:layout="@layout/fragment_listing" />
 </navigation>

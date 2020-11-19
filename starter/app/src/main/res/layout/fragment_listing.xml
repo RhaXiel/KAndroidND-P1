@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!-- This layout use LinearLayout for displaying a full screen list of shoes available.-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/fragment_horizontal_margin"
+            android:paddingTop="@dimen/fragment_vertical_margin"
+            android:paddingRight="@dimen/fragment_horizontal_margin"
+            android:paddingBottom="@dimen/fragment_vertical_margin"
+            android:orientation="vertical"
+            tools:context=".Listing">
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

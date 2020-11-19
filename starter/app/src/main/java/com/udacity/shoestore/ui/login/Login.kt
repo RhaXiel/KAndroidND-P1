@@ -19,6 +19,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 
 import com.udacity.shoestore.R
+import com.udacity.shoestore.databinding.FragmentLoginBinding
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class Login : Fragment() {
@@ -30,42 +31,29 @@ class Login : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
-        /*val binding = inflater.inflate(R.layout.fragment_login, container, false)
-        binding.login_button.setOnClickListener { v: View ->
-            v.findNavController().navigate(LoginDirections.actionLoginScreenToWelcome())
-        }
-        return binding.rootView*/
-    }
+        val binding : FragmentLoginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
-
-        val usernameEditText = view.findViewById<EditText>(R.id.username_textview)
-        val passwordEditText = view.findViewById<EditText>(R.id.password_textview)
-        val loginButton = view.findViewById<Button>(R.id.login_button)
-        val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
 
         loginViewModel.loginFormState.observe(this,
             Observer { loginFormState ->
                 if (loginFormState == null) {
                     return@Observer
                 }
-                loginButton.isEnabled = loginFormState.isDataValid
+                binding.loginButton.isEnabled = loginFormState.isDataValid
                 loginFormState.usernameError?.let {
-                    usernameEditText.error = getString(it)
+                    binding.usernameTextview.error = getString(it)
                 }
                 loginFormState.passwordError?.let {
-                    passwordEditText.error = getString(it)
+                    binding.passwordTextview.error = getString(it)
                 }
             })
 
         loginViewModel.loginResult.observe(this,
             Observer { loginResult ->
                 loginResult ?: return@Observer
-                loadingProgressBar.visibility = View.GONE
+                binding.loading.visibility = View.GONE
                 loginResult.error?.let {
                     showLoginFailed(it)
                 }
@@ -85,31 +73,42 @@ class Login : Fragment() {
 
             override fun afterTextChanged(s: Editable) {
                 loginViewModel.loginDataChanged(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    binding.usernameTextview.text.toString(),
+                    binding.passwordTextview.text.toString()
                 )
             }
         }
-        usernameEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.setOnEditorActionListener { _, actionId, _ ->
+        binding.usernameTextview.addTextChangedListener(afterTextChangedListener)
+        binding.passwordTextview.addTextChangedListener(afterTextChangedListener)
+        binding.passwordTextview.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 loginViewModel.login(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    binding.usernameTextview.text.toString(),
+                    binding .passwordTextview.text.toString()
                 )
             }
             false
         }
 
-        loginButton.setOnClickListener {
-            loadingProgressBar.visibility = View.VISIBLE
+        binding.loginButton.setOnClickListener {
+            binding.loading.visibility = View.VISIBLE
             loginViewModel.login(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString()
+                binding.usernameTextview.text.toString(),
+                binding.passwordTextview.text.toString()
             )
             it.findNavController().navigate(LoginDirections.actionLoginScreenToWelcome())
         }
+
+        binding.signupButton.setOnClickListener {
+            binding.loading.visibility = View.VISIBLE
+            loginViewModel.login(
+                binding.usernameTextview.text.toString(),
+                binding.passwordTextview.text.toString()
+            )
+            it.findNavController().navigate(LoginDirections.actionLoginScreenToWelcome())
+        }
+
+        return binding.root
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
