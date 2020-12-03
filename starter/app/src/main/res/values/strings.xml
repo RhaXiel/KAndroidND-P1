@@ -22,5 +22,9 @@
     <string name="instructions_sidenote_label">Dev note: Most layouts use ConstraintLayouts for easier management on different screen sizes and fastest placement of elements. The listing screen is using LinearLayout to show all the Shoe Store items as a list.</string>
     <string name="listing_button">Listing</string>
     <string name="listing_title_label">Listing</string>
+    <string name="shoe_name_text">Shoe Name</string>
+    <string name="shoe_size_text">Shoe Size</string>
+    <string name="shoe_company_text">Shoe Company</string>
+    <string name="shoe_description_text">Shoe Description</string>
 
 </resources>

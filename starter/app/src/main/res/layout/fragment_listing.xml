@@ -16,18 +16,36 @@
         <LinearLayout
             android:id="@+id/shoes_linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:paddingLeft="@dimen/fragment_horizontal_margin"
             android:paddingTop="@dimen/fragment_vertical_margin"
             android:paddingRight="@dimen/fragment_horizontal_margin"
             android:paddingBottom="@dimen/fragment_vertical_margin"
+            android:gravity="center"
             tools:context=".Listing">
 
-            <ListView
-                android:id="@+id/shoes_listview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/shoeName_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shoe_name_text"
+                />
+            <TextView
+                android:id="@+id/shoeSize_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shoe_size_text" />
+            <TextView
+                android:id="@+id/shoeCompany_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shoe_company_text" />
+            <TextView
+                android:id="@+id/shoeDescription_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shoe_description_text" />
         </LinearLayout>
     </ScrollView>
 
