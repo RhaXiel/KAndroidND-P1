@@ -6,47 +6,95 @@
     <data>
         <variable
             name="listingViewModel"
-            type="com.udacity.shoestore.ListingViewModel" />
+            type="com.udacity.shoestore.models.ListingViewModel" />
     </data>
 
-    <ScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/shoes_linearlayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/fragment_horizontal_margin"
-            android:paddingTop="@dimen/fragment_vertical_margin"
-            android:paddingRight="@dimen/fragment_horizontal_margin"
-            android:paddingBottom="@dimen/fragment_vertical_margin"
-            android:gravity="center"
-            tools:context=".Listing">
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-            <TextView
-                android:id="@+id/shoeName_textview"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/shoesheader_linearlayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/shoe_name_text"
-                />
-            <TextView
-                android:id="@+id/shoeSize_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/shoe_size_text" />
-            <TextView
-                android:id="@+id/shoeCompany_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/shoe_company_text" />
-            <TextView
-                android:id="@+id/shoeDescription_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/shoe_description_text" />
-        </LinearLayout>
-    </ScrollView>
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/listing_large_field_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/fragment_horizontal_margin"
+                    android:text="@string/shoe_name_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/ListHeader" />
+
+                <TextView
+                    android:layout_width="@dimen/listing_mid_field_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/fragment_horizontal_margin"
+                    android:text="@string/shoe_size_text"
+                    style="@style/ListHeader"
+                    app:layout_constraintStart_toEndOf="@+id/shoeName_textview"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="@dimen/listing_large_field_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/fragment_horizontal_margin"
+                    android:text="@string/shoe_company_text"
+                    style="@style/ListHeader"
+                    app:layout_constraintStart_toEndOf="@+id/shoeSize_textview"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="@dimen/listing_large_field_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/fragment_horizontal_small_margin"
+                    android:text="@string/shoe_description_text"
+                    style="@style/ListHeader"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/shoeCompany_textview"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/listing_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/shoesheader_linearlayout">
+
+                <LinearLayout
+                    android:id="@+id/shoes_linearlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+
+            </ScrollView>
+        </RelativeLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_element_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin"
+        android:clickable="true"
+        android:contentDescription="@string/add_shoe_message"
+        android:focusable="true"
+        android:src="@drawable/ic_add"
+        app:borderWidth="0dp"
+        app:elevation="@dimen/fragment_horizontal_margin"
+        app:fabSize="normal"
+        app:layout_anchor="@id/listing_scrollview"
+        app:layout_anchorGravity="bottom|end"
+        app:pressedTranslationZ="@dimen/pressed_translation" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

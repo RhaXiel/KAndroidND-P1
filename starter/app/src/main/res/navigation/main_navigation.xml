@@ -38,5 +38,18 @@
         android:id="@+id/listingFragment"
         android:name="com.udacity.shoestore.Listing"
         android:label="listing_fragment"
-        tools:layout="@layout/fragment_listing" />
+        tools:layout="@layout/fragment_listing" >
+        <action
+            android:id="@+id/action_listingFragment_to_fragment_detail"
+            app:destination="@id/fragment_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_detail"
+        android:name="com.udacity.shoestore.fragment_detail"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_fragment_detail_to_listingFragment"
+            app:destination="@id/listingFragment" />
+    </fragment>
 </navigation>

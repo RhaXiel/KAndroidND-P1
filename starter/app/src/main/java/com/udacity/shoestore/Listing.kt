@@ -10,12 +10,17 @@ import android.widget.ArrayAdapter
 import android.widget.ListAdapter
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.udacity.shoestore.databinding.FragmentListingBinding
+import com.udacity.shoestore.models.ListingViewModel
 import com.udacity.shoestore.models.Shoe
 import kotlinx.android.synthetic.main.fragment_listing.view.*
+import kotlinx.android.synthetic.main.fragment_listing_item.view.*
 import timber.log.Timber
+import java.sql.Time
 
 class Listing : Fragment() {
     private lateinit var listingViewModel: ListingViewModel
@@ -31,50 +36,25 @@ class Listing : Fragment() {
         listingViewModel = ViewModelProvider(this).get(ListingViewModel::class.java)
 
         binding.listingViewModel = listingViewModel
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
-        listingViewModel.shoesListing.observe(viewLifecycleOwner, Observer { shoesListing ->
-            val shoeNames = arrayOfNulls<String>(shoesListing.size)
-            for (i in 0 until shoesListing.size) {
-                val shoe = shoesListing[i]
-                shoeNames[i] = shoe?.name
+        binding.addElementButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_listingFragment_to_fragment_detail)
+        }
+
+        // Add observer for shoes
+        listingViewModel.shoesListing.observe(viewLifecycleOwner, Observer { shoes ->
+            for (item in shoes) {
+                Timber.i(item.toString())
+                val child: View = layoutInflater.inflate(R.layout.fragment_listing_item, null)
+                child.shoeName_textview.text = item.name
+                child.shoeSize_textview.text = item.size.toString()
+                child.shoeCompany_textview.text = item.company
+                child.shoeDescription_textview.text = item.description
+                binding.shoesLinearlayout.addView(child)
             }
-            //binding.shoesLinearlayout.shoeName_textview.text = shoe?.name
-            //Timber.i(shoeNames.toString())
-            val adapter = ArrayAdapter(
-                requireActivity(),
-                android.R.layout.simple_list_item_1,
-                shoeNames
-            ) //listItems.toList().toString()
-            //val view = binding.root
-            //setContentView(view)
-            //binding.shoesListview.adapter = adapter
-            //Timber.i(shoesListing.toString())
         })
-
 
         return binding.root
     }
-
 }
-
-
-/*
-companion object {
-    fun newInstance() = Listing()
-}
-
-private lateinit var viewModel: ListingViewModel
-
-override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-): View? {
-    return inflater.inflate(R.layout.fragment_listing, container, false)
-}
-
-override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    viewModel = ViewModelProvider(this).get(ListingViewModel::class.java)
-    // TODO: Use the ViewModel
-}*/

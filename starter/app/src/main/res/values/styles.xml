@@ -24,4 +24,18 @@
         <item name="colorAccent">@color/selected_green_color</item>
     </style>
 
+    <style name="ListHeader">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="form_label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:layout_marginEnd">24dp</item>
+    </style>
+
+    <!-- Text Styles -->
 </resources>

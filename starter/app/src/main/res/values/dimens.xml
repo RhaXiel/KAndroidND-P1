@@ -2,4 +2,12 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="fragment_horizontal_margin">16dp</dimen>
     <dimen name="fragment_vertical_margin">16dp</dimen>
+    <dimen name="pressed_translation">16dp</dimen>
+    <dimen name="layout_margin">24dp</dimen>
+    <dimen name="fragment_horizontal_small_margin">8dp</dimen>
+    <dimen name="listing_large_field_width">96dp</dimen>
+    <dimen name="listing_mid_field_width">36dp</dimen>
+    <dimen name="form_margin_start">24dp</dimen>
+    <dimen name="form_margin_top">4dp</dimen>
+    <dimen name="form_margin_end">24dp</dimen>
 </resources>
