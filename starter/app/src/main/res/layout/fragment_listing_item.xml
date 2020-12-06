@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><!-- This layout use LinearLayout for easier matching with the listing definition.-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/shoeName_textview"
+        android:layout_width="@dimen/listing_large_field_width"
+        android:layout_height="match_parent"
+
+        android:layout_marginStart="@dimen/fragment_horizontal_margin"
+        android:text="@string/shoe_name_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/shoeSize_textview"
+        android:layout_width="@dimen/listing_mid_field_width"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/fragment_horizontal_margin"
+        android:text="@string/shoe_size_text"
+        app:layout_constraintStart_toEndOf="@+id/shoeName_textview"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/shoeCompany_textview"
+        android:layout_width="@dimen/listing_large_field_width"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/fragment_horizontal_margin"
+        android:text="@string/shoe_company_text"
+        app:layout_constraintStart_toEndOf="@+id/shoeSize_textview"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/shoeDescription_textview"
+        android:layout_width="@dimen/listing_large_field_width"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/fragment_horizontal_small_margin"
+        android:text="@string/shoe_description_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/shoeCompany_textview"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
