@@ -1,23 +1,15 @@
 package com.udacity.shoestore
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
+import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.databinding.FragmentWelcomeBinding
-import com.udacity.shoestore.ui.login.LoginDirections
-import com.udacity.shoestore.ui.login.LoginViewModel
-import com.udacity.shoestore.ui.login.LoginViewModelFactory
 
 class Welcome : Fragment() {
+
+    private lateinit var logoutButton : MenuItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +21,16 @@ class Welcome : Fragment() {
         binding.instructionsButton.setOnClickListener {
             findNavController().navigate(WelcomeDirections.actionWelcomeToInstructions())
         }
+        setHasOptionsMenu(true)
         return binding.root
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        if (menu != null) {
+            logoutButton = menu.findItem(R.id.loginFragment)
+            logoutButton.isVisible = true
+        }
+    }
+
 }

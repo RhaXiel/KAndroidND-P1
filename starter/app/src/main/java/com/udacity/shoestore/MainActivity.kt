@@ -1,38 +1,53 @@
 package com.udacity.shoestore
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 //import com.udacity.shoestore.databinding.ActivityMainBinding
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.udacity.shoestore.models.ListingViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var coordinatorLayout: CoordinatorLayout
+    private lateinit var listingViewModel: ListingViewModel
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var logoutButton : MenuItem
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Timber.plant(Timber.DebugTree())
-        /*val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        coordinatorLayout = binding.coordinatorLayout
-        val navController = this.findNavController(R.id.myNavHostFragment)*/
-        //NavigationUI.setupActionBarWithNavController(this, navController, coordinatorLayout) //Original
-        //NavigationUI.setupWithNavController(this, navController, coordinatorLayout)
-        //appBarConfiguration = AppBarConfiguration(navController.graph, coordinatorLayout)
-        // prevent nav gesture if not on start destination
-        /*navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
-            if (nd.id == nc.graph.startDestination) {
-                coordinatorLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-            } else {
-                coordinatorLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            }
-        }*/
-        //NavigationUI.setupWithNavController(binding.navView, navController)
+
+        listingViewModel = ViewModelProvider(this).get(ListingViewModel::class.java)
+
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.logout_menu, menu)
+        if (menu != null) {
+            logoutButton = menu.findItem(R.id.loginFragment)
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, nav_host_fragment.findNavController())
+                || super.onOptionsItemSelected(item)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true;
     }
 }
+

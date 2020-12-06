@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">ShoeStore</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name_title">Shoe Store</string>
     <!-- Strings related to login -->
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
@@ -14,6 +13,8 @@
     <string name="invalid_username">Not a valid email</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="action_logout">Logout</string>
+    <!-- Strings related to shoe store -->
     <string name="welcome_first">This project consists of five screens that let you manage a shoe store.</string>
     <string name="welcome_second">You can add, modify, list and do basic stuff with each item.</string>
     <string name="instructions_button">Instructions</string>
@@ -33,5 +34,6 @@
     <string name="company_hint">Noik</string>
     <string name="size_hint">15.0</string>
     <string name="name_hint">Good shoe</string>
+    <string name="cancel_button_text">Cancel</string>
 
 </resources>

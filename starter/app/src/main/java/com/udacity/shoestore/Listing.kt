@@ -1,29 +1,20 @@
 package com.udacity.shoestore
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListAdapter
-import android.widget.TextView
+import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.udacity.shoestore.databinding.FragmentListingBinding
 import com.udacity.shoestore.models.ListingViewModel
-import com.udacity.shoestore.models.Shoe
-import kotlinx.android.synthetic.main.fragment_listing.view.*
 import kotlinx.android.synthetic.main.fragment_listing_item.view.*
 import timber.log.Timber
-import java.sql.Time
 
 class Listing : Fragment() {
     private lateinit var listingViewModel: ListingViewModel
+    private lateinit var logoutButton: MenuItem
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,10 +24,13 @@ class Listing : Fragment() {
         val binding: FragmentListingBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_listing, container, false)
 
-        listingViewModel = ViewModelProvider(this).get(ListingViewModel::class.java)
+        activity?.let {
+            listingViewModel = ViewModelProvider(it).get(ListingViewModel::class.java)
+        }
 
         binding.listingViewModel = listingViewModel
         binding.lifecycleOwner = this
+
 
         binding.addElementButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_listingFragment_to_fragment_detail)
@@ -55,6 +49,16 @@ class Listing : Fragment() {
             }
         })
 
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        if (menu != null) {
+            logoutButton = menu.findItem(R.id.loginFragment)
+            logoutButton.isVisible = true
+        }
     }
 }

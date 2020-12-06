@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
@@ -17,6 +15,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.udacity.shoestore.MainActivity
 
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentLoginBinding
